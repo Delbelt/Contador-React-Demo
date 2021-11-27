@@ -32,3 +32,24 @@ self.addEventListener("install", (evento) => //Agrega/Instala un detector de Eve
     );
 });
 
+//ACTIVACION SERVICE WORKER (sw)
+self.addEventListener("activate", (evento) => //Activa el cache guardado
+//("Tipo de evento", funcion(e) =>)
+{
+    const listaCache = [CACHE_NAME]; //Apunta a la lista de CACHE_NAME que es la que contiene todos los componentes en cache
+
+    evento.waitUntil (
+        caches.keys().then(cachesName => { //cachesName = lista de caches (tiene a todos)
+            return Promise.all(cachesName.map(cacheName => { //cacheName (es el objeto individual)
+                //Pregunta si en la listaCache existe el objeto individual cacheName
+                listaCache.indexOf(cacheName) == -1 && caches.delete(cacheName) //Elimina el cache anterior, y deja el mas reciente
+            }));
+        }).then (() => self.clients.claim())
+        //clients.claim: Puede tomar el control de clients no supervisados, dentro del sw una vez que este activado
+        //Sirve para no hacer una llamada al servidor (Next Page-Reload) (aunque tengamos el cache guardado)
+        //de un archivo o datos en cache que tengamos, entonces claim lo que hace, es:
+        //brindar los datos almacenados dentro del sw
+        //en el cache desde el primer momento que se guarda esa informacion (First Load) lo que optimiza la carga de la pagina y la performance
+    );
+});
+

@@ -14,6 +14,14 @@ h3
     font-size: 35px; 
 }
 
+h2
+{
+    font-size: 30px;  
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 5px 10px 4px rgb(0, 0, 0);
+}
+
 button
 {
     margin: 5px;
@@ -27,8 +35,7 @@ button
     display: inline-block;
     font-size: 15px;
     border-radius: 5px;
-    border: 3px solid #6282a7
-    
+    border: 3px solid #6282a7    
 }
 
 button:hover
@@ -45,6 +52,8 @@ hr
     margin-right: 35%;
     background-color: aquamarine;
     border-color: cadetblue;
+    border-radius: 5px;
+    opacity: 80%;    
 }
 
 /* Manipulamos la visual del contador (contador.js) a traves de su cambio dinamico de ClassName */
