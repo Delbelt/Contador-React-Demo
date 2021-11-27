@@ -9,8 +9,23 @@ body
     text-align: center;
 }
 
-button
+hr
 {
-    margin: 10;
-    padding: 10;
+    height: 10px;
+    margin-left: 35%;
+    margin-right: 35%;
+    background-color: aquamarine;
+    border-color: cadetblue;
+}
+
+/* Manipulamos la visual del contador (contador.js) a traves de su cambio dinamico de ClassName */
+
+.menor /* Todo lo que tenga ClassName menor sera modificado */
+{
+    color: tomato;
+}
+
+.mayor /* Todo lo que tenga ClassName mayor sera modificado */
+{
+    color:limegreen;
 }
