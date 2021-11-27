@@ -53,3 +53,23 @@ self.addEventListener("activate", (evento) => //Activa el cache guardado
     );
 });
 
+//Retorna (en caso de ser nuevo) o captura (lo que ya esta en cache)
+//Es decir se encargara de cachear lo nuevo, y capturar para retornar lo que ya esta almacenado en el sw
+self.addEventListener("fetch", (evento) =>
+{
+//Fetch: va a buscar una nueva version de nuestros archivos y va a retornar las respuestas
+//que tenga cacheadas, o caso contrario (nuevos archivos SIN cachear) nos retorna:
+//La peticion y respondernos una nueva cosa/respuesta
+    evento.respondWith( 
+    //respondWith: evita el manejo de recuperación predeterminado del navegador y permite proporcionar una promesa para Response personalizada.
+
+        caches.match(evento.request).then(respuesta => // request: lo que se esta intentando encontrar respuestas en el Cache
+        //caches.match: Proporciona la instancia del almacenamiento en cache (todo basicamente)
+        //cache.match: sin S, proporciona la instancia de un cache en especifico 
+        (respuesta ? respuesta : fetch(evento.request))) //Condicion Ternaria
+        //Respuesta existe?:
+        //SI: Retornar la respuesta (Es decir que ya existe en el cache)
+        //NO: Retornar la respuesta del servidor (internet) (Es decir que no existia en cache)
+    )
+    
+});
